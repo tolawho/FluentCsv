@@ -1,6 +1,6 @@
 # FluentCsv
 
-A Laravel package that allows you to generate or save csv file being encoded.  
+A Laravel package that allows you to generate or save csv file being encoded.
 This package is maintained under Laravel 5.7.
 
 # Installation
@@ -13,18 +13,21 @@ Execute composer command.
 
 ## Download
 
-    $csv_data = [   // UTF-8 
+    $csv_data = [   // UTF-8
         ['データ 1-1', 'データ 1-2', 'データ 1-3'],
         ['データ 2-1', 'データ 2-2', 'データ 2-3'],
         ['データ 3-1', 'データ 3-2', 'データ 3-3'],
     ];
     $to_encoding = 'SJIS-win';
     $fluent = \FluentCsv::setData($csv_data, $to_encoding);
-    return $fluent->download('テスト.csv');    // File name can be multi-byte character.
-    
+    return $fluent->setDelimeter(",")
+        ->setEnclosure('"')
+        ->setEscapeChar('"')
+        ->download('テスト.csv');    // File name can be multi-byte character.
+
 ## Save
 
-    $csv_data = [   // UTF-8 
+    $csv_data = [   // UTF-8
         ['データ 1-1', 'データ 1-2', 'データ 1-3'],
         ['データ 2-1', 'データ 2-2', 'データ 2-3'],
         ['データ 3-1', 'データ 3-2', 'データ 3-3'],
@@ -59,12 +62,11 @@ Execute composer command.
     // Basic way
     $path = '/PATH/TO/YOUR/CSV/FOLDER/test.csv';
     $data = \FluentCsv::parse($path);
-    
+
     // with encoding
     $path = '/PATH/TO/YOUR/CSV/FOLDER/test.csv';
     $from_encoding = 'sjis-win';
     $data = \FluentCsv::parse($path, $from_encoding);
-
 
 # License
 
